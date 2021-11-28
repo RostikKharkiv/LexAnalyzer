@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LexAnalyzer
+namespace LexAnalyzer.Lab2
 {
     class Program
     {
@@ -24,6 +28,17 @@ namespace LexAnalyzer
 					Console.WriteLine($"Pos[{i}]: Value = {lexemes[i].Value} (Category: {lexemes[i].Category}, Type: {lexemes[i].Type}");
 				}
 			}
+			else
+			{
+				return;
+			}
+
+			var syn = new SyntaxAnalyzer(lexemes);
+			Console.WriteLine("Beginning of syntax analysis...");
+			var syntaxResult = syn.Go();
+			Console.WriteLine($"Syntax analys completed. Result: {syntaxResult.Success}");
+			if (!syntaxResult.Success) Console.WriteLine(syntaxResult.ErrorMessage);
+
 		}
 
 	}

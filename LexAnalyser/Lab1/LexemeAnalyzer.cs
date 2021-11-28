@@ -283,7 +283,7 @@ namespace LexAnalyzer
 						{
 							parCount++;
 							state = State.OpenPar;
-							lexBufCur.Append(symbol);
+							lexBufNext.Append(symbol);
 						}
 						else if (symbol == ')')
 						{
@@ -485,7 +485,9 @@ namespace LexAnalyzer
 				textIndex++;
 			}
 
-			return state == State.Final && parCount == 0;
+			return state == State.Final;
+
+			//return state == State.Final && parCount == 0;
 
 		}
 
