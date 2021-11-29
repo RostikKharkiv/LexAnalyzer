@@ -189,6 +189,18 @@ namespace LexAnalyzer.Lab2
 			return true;
 		}
 
+		private bool IsIdentifier()
+		{
+			if (_lexReader.Current == null ||
+				(_lexReader.Current.Category != Category.Identifier))
+			{
+				return Error("Expected identifier", _lexems.IndexOf(_lexReader.Current));
+			}
+
+			_lexReader.MoveNext();
+			return true;
+		}
+
 		private bool IsOperand()
 		{
 			if (_lexReader.Current == null ||
@@ -226,6 +238,12 @@ namespace LexAnalyzer.Lab2
 				if (_lexReader.Current != null 
 					&&(_lexReader.Current.Type == LexType.Output || _lexReader.Current.Type == LexType.Input))
 				{
+					if (_lexReader.Current.Type == LexType.Input)
+                    {
+						_lexReader.MoveNext();
+						if (!IsIdentifier()) return false;
+						return IsDelimiter();
+					}
 					_lexReader.MoveNext();
 					if (!IsOperand()) return false;
 					return IsDelimiter();

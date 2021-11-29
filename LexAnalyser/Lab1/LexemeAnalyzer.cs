@@ -450,6 +450,7 @@ namespace LexAnalyzer
 					case State.Input:
 						if (char.IsWhiteSpace(symbol)) state = State.Input;
 						else if (char.IsLetter(symbol)) state = State.Identifier;
+						else if (char.IsDigit(symbol)) state = State.Constant;
 						else state = State.Error;
 						toAdd = false;
 						if (!char.IsWhiteSpace(symbol))
