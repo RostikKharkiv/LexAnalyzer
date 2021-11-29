@@ -76,6 +76,11 @@ namespace LexAnalyzer
 							state = State.ClosePar;
 							lexBufNext.Append(symbol);
 						}
+						else if (symbol == '=')
+						{
+							state = State.Start;
+							lexBufCur.Append(symbol);
+						}
 						else if (char.IsLetter(symbol))
 						{
 							state = State.Identifier;
@@ -254,9 +259,14 @@ namespace LexAnalyzer
 							state = State.RevComp;
 							lexBufNext.Append(symbol);
 						}
-						else if (symbol == '>' || symbol == '=')
+						else if (symbol == '>')
 						{
 							state = State.Comp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '=')
+						{
+							state = State.As;
 							lexBufNext.Append(symbol);
 						}
 						else if (symbol == '+' || symbol == '-' || symbol == '/' || symbol == '*')
@@ -302,9 +312,14 @@ namespace LexAnalyzer
 							state = State.RevComp;
 							lexBufNext.Append(symbol);
 						}
-						else if (symbol == '>' || symbol == '=')
+						else if (symbol == '>')
 						{
 							state = State.Comp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '=')
+						{
+							state = State.As;
 							lexBufNext.Append(symbol);
 						}
 						else if (symbol == '+' || symbol == '-' || symbol == '/' || symbol == '*')
@@ -348,7 +363,6 @@ namespace LexAnalyzer
 						{
 							state = State.Identifier;
 							lexBufNext.Append(symbol);
-							toAdd = false;
 						}
 						else if (symbol == '<')
 						{
@@ -401,7 +415,6 @@ namespace LexAnalyzer
 						{
 							state = State.Identifier;
 							lexBufNext.Append(symbol);
-							toAdd = false;
 						}
 						else if (symbol == '<')
 						{

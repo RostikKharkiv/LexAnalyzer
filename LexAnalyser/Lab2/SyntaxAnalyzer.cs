@@ -216,6 +216,13 @@ namespace LexAnalyzer.Lab2
 
 			if (_lexReader.Current == null || _lexReader.Current.Category != Category.Identifier)
 			{
+				while (_lexReader.Current != null && _lexReader.Current?.Type == LexType.OpenPar)
+				{
+					parCount++;
+					par.Push(_lexReader.Current);
+					_lexReader.MoveNext();
+				}
+
 				if (_lexReader.Current != null 
 					&&(_lexReader.Current.Type == LexType.Output || _lexReader.Current.Type == LexType.Input))
 				{
@@ -228,7 +235,18 @@ namespace LexAnalyzer.Lab2
 					return Error("Expected keyword \"End\"", _lexems.Count);
 				}
 
-                return Error("Expected identifier", _lexems.IndexOf(_lexReader.Current));
+				while (_lexReader.Current != null && _lexReader.Current?.Type == LexType.ClosePar)
+				{
+					parCount--;
+					if (par.Count == 0)
+					{
+						return Error("Incorrect count of parenthesis", _lexems.IndexOf(_lexReader.Current));
+					}
+					par.Pop();
+					_lexReader.MoveNext();
+				}
+
+				return Error("Expected identifier", _lexems.IndexOf(_lexReader.Current));
 			}
 
 
