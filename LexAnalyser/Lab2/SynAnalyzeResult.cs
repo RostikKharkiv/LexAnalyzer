@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LexAnalyzer.Lab3;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace LexAnalyzer.Lab2
 	{
 		public bool Success { get; set; }
 		public string ErrorMessage { get; set; }
+		public List<PostfixEntry> EntryList { get; set; }
 	}
 
 }

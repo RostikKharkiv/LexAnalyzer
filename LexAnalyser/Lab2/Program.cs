@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LexAnalyzer.Lab3;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,6 +39,10 @@ namespace LexAnalyzer.Lab2
             var syntaxResult = syn.Go();
             Console.WriteLine($"Syntax analys completed. Result: {syntaxResult.Success}");
             if (!syntaxResult.Success) Console.WriteLine(syntaxResult.ErrorMessage);
+
+            var postfix = new PostfixProgram(lexemes);
+            postfix.TakeThis();
+            postfix.Show();
 
         }
 

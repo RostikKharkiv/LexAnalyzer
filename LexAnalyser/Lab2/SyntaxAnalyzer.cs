@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LexAnalyzer;
+using LexAnalyzer.Lab3;
 
 namespace LexAnalyzer.Lab2
 {
@@ -12,9 +13,19 @@ namespace LexAnalyzer.Lab2
 		private List<Lexeme> _lexems;
 		private IEnumerator<Lexeme> _lexReader;
 		private string _errorMsg;
-		private bool isElse = false;
+		private static bool isElse = false;
 		private int parCount = 0;
 		private Stack<Lexeme> par = new Stack<Lexeme>();
+
+		public static bool IsElse
+        {
+			get
+            {
+				return isElse;
+            }
+        }
+
+		private List<PostfixEntry> _entryList;
 
 		public SyntaxAnalyzer(List<Lexeme> lexemeList)
 		{
@@ -26,17 +37,21 @@ namespace LexAnalyzer.Lab2
 			_errorMsg = string.Empty;
 			_lexReader = _lexems.GetEnumerator();
 
+			_entryList = new List<PostfixEntry>();
+
 			var syntaxResult = IsWhileStatement();
 
 			return new SynAnalyzeResult
 			{
 				Success = syntaxResult,
 				ErrorMessage = syntaxResult ? string.Empty : _errorMsg,
+				EntryList = _entryList,
 			};
 		}
 
 		private bool IsWhileStatement()
 		{
+			var indFirst = _entryList.Count;
 
 			if (_lexems.Count == 0) return Error("Lexems list is empty", 0);
 
@@ -312,18 +327,25 @@ namespace LexAnalyzer.Lab2
 					_lexReader.MoveNext();
 				}
 
-				if (!IsOperand()) return false;
-			}
-
-			while (_lexReader.Current?.Type == LexType.ClosePar)
-			{
-				parCount--;
-				if (par.Count == 0)
+				while (_lexReader.Current?.Type == LexType.OpenPar)
 				{
-					return Error("Incorrect count of parenthesis", _lexems.IndexOf(_lexReader.Current));
+					parCount++;
+					par.Push(_lexReader.Current);
+					_lexReader.MoveNext();
 				}
-				par.Pop();
-				_lexReader.MoveNext();
+
+				if (!IsOperand()) return false;
+
+				while (_lexReader.Current?.Type == LexType.ClosePar)
+				{
+					parCount--;
+					if (par.Count == 0)
+					{
+						return Error("Incorrect count of parenthesis", _lexems.IndexOf(_lexReader.Current));
+					}
+					par.Pop();
+					_lexReader.MoveNext();
+				}
 			}
 
 			return true;
