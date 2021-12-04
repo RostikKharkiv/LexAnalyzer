@@ -20,7 +20,15 @@ namespace LexAnalyzer.Lab3
             _lexems = lexemeList;
 		}
 
-        public void TakeThis()
+		public List<PostfixEntry> GetEntryList
+        {
+			get
+            {
+				return _entryList;
+            }
+        }
+
+		public void TakeThis()
         {
 			_lexReader = _lexems.GetEnumerator();
 			_lexReader.MoveNext();
@@ -100,9 +108,9 @@ namespace LexAnalyzer.Lab3
 					_lexReader.MoveNext();
 				}
 
-				if (_lexReader.Current.Type == LexType.Input) LowPriority(Cmd.READ);
+				if (_lexReader.Current.Type == LexType.Input) LowPriority(Cmd.INP);
 
-				if (_lexReader.Current.Type == LexType.Output) LowPriority(Cmd.PRINT);
+				if (_lexReader.Current.Type == LexType.Output) LowPriority(Cmd.OUT);
 
 				if (_lexReader.Current.Value == "-") LowPriority(Cmd.SUB);
 

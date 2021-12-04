@@ -9,6 +9,6 @@ namespace LexAnalyzer.Lab3
     public class Enums
     {
         public enum EntryType { Cmd, Var, Const, CmdPtr }
-        public enum Cmd { JMP, JZ, SET, ADD, SUB, MUL, DIV, AND, OR, CMPE, CMPNE, CMPL, CMPGE, CMPLE, CMPG, PRINT, READ }
+        public enum Cmd { JMP, JZ, SET, ADD, SUB, MUL, DIV, AND, OR, CMPE, CMPNE, CMPL, CMPGE, CMPLE, CMPG, OUT, INP }
     }
 }

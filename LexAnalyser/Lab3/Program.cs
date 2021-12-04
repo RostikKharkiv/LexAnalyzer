@@ -1,4 +1,5 @@
-﻿//using LexAnalyzer.Lab3;
+﻿//using LexAnalyzer.Lab2;
+//using LexAnalyzer.Lab4;
 //using System;
 //using System.Collections.Generic;
 //using System.IO;
@@ -6,7 +7,7 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
-//namespace LexAnalyzer.Lab2
+//namespace LexAnalyzer.Lab3
 //{
 //    public class Program
 //    {
@@ -39,7 +40,13 @@
 //            var syntaxResult = syn.Go();
 //            Console.WriteLine($"Syntax analys completed. Result: {syntaxResult.Success}");
 //            if (!syntaxResult.Success) Console.WriteLine(syntaxResult.ErrorMessage);
-//        }
 
+//            if (syntaxResult.Success)
+//            {
+//                var postfix = new PostfixProgram(lexemes);
+//                postfix.TakeThis();
+//                postfix.Show();
+//            }
+//        }
 //    }
 //}

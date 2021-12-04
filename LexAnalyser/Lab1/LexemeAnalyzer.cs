@@ -359,7 +359,12 @@ namespace LexAnalyzer
 							state = State.ClosePar;
 							lexBufNext.Append(symbol);
 						}
-						else if (char.IsDigit(symbol) || char.IsLetter(symbol))
+						else if (char.IsDigit(symbol))
+						{
+							state = State.Constant;
+							lexBufNext.Append(symbol);
+						}
+						else if (char.IsLetter(symbol))
 						{
 							state = State.Identifier;
 							lexBufNext.Append(symbol);
