@@ -67,7 +67,6 @@ namespace LexAnalyzer.Lab4
             }
             Console.WriteLine();
             Console.WriteLine();
-			Console.WriteLine("Interpreting...");
 			var interpreter = new Interpreter(postfix.GetEntryList);
 			SetDefaultVars(interpreter);
 
