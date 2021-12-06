@@ -90,6 +90,10 @@ namespace LexAnalyzer.Lab4
 							Console.WriteLine(PopVal());
 							pos++;
 							break;
+						case Cmd.INP:
+							InputCmd();
+							pos++;
+							break;
 						default:
 							break;
 					}
@@ -123,6 +127,25 @@ namespace LexAnalyzer.Lab4
 			{
 				return 0;
 			}
+		}
+
+		public void InputCmd()
+		{
+
+			var variable = _stack.Pop();
+
+			if (variable.EntryType != EntryType.Var)
+			{
+
+				throw new ArgumentException("EntryType");
+
+			}
+
+			Console.Write($"{variable.Value} >> ");
+
+			var val = int.Parse(Console.ReadLine());
+
+			SetValuesToVariables(variable.Value, val);
 		}
 
 		private void PushVal(int val)

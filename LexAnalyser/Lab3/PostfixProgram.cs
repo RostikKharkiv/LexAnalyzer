@@ -172,7 +172,7 @@ namespace LexAnalyzer.Lab3
 
 			if (_lexReader.Current.Type == LexType.Delimiter)
 			{
-				while (_entryStack?.Peek().Cmd != Cmd.JZ && _entryStack.Count != 0)
+				while (!(_entryStack.Count == 0) && _entryStack.Peek().Cmd != Cmd.JZ)
 				{
 					_entryList.Add(_entryStack.Peek());
 					_entryStack.Pop();
@@ -207,7 +207,7 @@ namespace LexAnalyzer.Lab3
 
 			if (_lexReader.Current.Type == LexType.Delimiter)
 			{
-				while (_entryStack?.Peek().Cmd != Cmd.JZ && _entryStack.Count != 0)
+				while (_entryStack.Count != 0 &&  _entryStack.Peek().Cmd != Cmd.JZ)
 				{
 					_entryList.Add(_entryStack.Peek());
 					_entryStack.Pop();

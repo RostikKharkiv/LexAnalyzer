@@ -81,6 +81,26 @@ namespace LexAnalyzer
 							state = State.Start;
 							lexBufCur.Append(symbol);
 						}
+						else if (symbol == '<')
+						{
+							state = State.RevComp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '>')
+						{
+							state = State.Comp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '+' || symbol == '-' || symbol == '/' || symbol == '*')
+						{
+							state = State.Ao;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == ';')
+						{
+							state = State.Del;
+							lexBufNext.Append(symbol);
+						}
 						else if (char.IsLetter(symbol))
 						{
 							state = State.Identifier;
@@ -112,6 +132,31 @@ namespace LexAnalyzer
 						{
 							parCount--;
 							state = State.ClosePar;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '<')
+						{
+							state = State.RevComp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '>')
+						{
+							state = State.Comp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '=')
+						{
+							state = State.As;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '+' || symbol == '-' || symbol == '/' || symbol == '*')
+						{
+							state = State.Ao;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == ';')
+						{
+							state = State.Del;
 							lexBufNext.Append(symbol);
 						}
 						else if (char.IsLetter(symbol))
@@ -179,6 +224,31 @@ namespace LexAnalyzer
 							state = State.ClosePar;
 							lexBufNext.Append(symbol);
 						}
+						else if (symbol == '<')
+						{
+							state = State.RevComp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '>')
+						{
+							state = State.Comp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '=')
+						{
+							state = State.As;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '+' || symbol == '-' || symbol == '/' || symbol == '*')
+						{
+							state = State.Ao;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == ';')
+						{
+							state = State.Del;
+							lexBufNext.Append(symbol);
+						}
 						else if (char.IsLetter(symbol))
 						{
 							state = State.Identifier;
@@ -217,6 +287,31 @@ namespace LexAnalyzer
 						else if (char.IsWhiteSpace(symbol))
 						{
 							state = State.Start;
+						}
+						else if (symbol == '<')
+						{
+							state = State.RevComp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '>')
+						{
+							state = State.Comp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '=')
+						{
+							state = State.As;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '+' || symbol == '-' || symbol == '/' || symbol == '*')
+						{
+							state = State.Ao;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == ';')
+						{
+							state = State.Del;
+							lexBufNext.Append(symbol);
 						}
 						else if (char.IsDigit(symbol))
 						{
@@ -476,6 +571,31 @@ namespace LexAnalyzer
 						{
 							parCount--;
 							state = State.ClosePar;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '<')
+						{
+							state = State.RevComp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '>')
+						{
+							state = State.Comp;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '=')
+						{
+							state = State.As;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == '+' || symbol == '-' || symbol == '/' || symbol == '*')
+						{
+							state = State.Ao;
+							lexBufNext.Append(symbol);
+						}
+						else if (symbol == ';')
+						{
+							state = State.Del;
 							lexBufNext.Append(symbol);
 						}
 						else if (char.IsLetter(symbol))
